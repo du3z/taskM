@@ -9,8 +9,7 @@ function App() {
   const [isDarkTheme, setIsDarkTheme] = useLocalStorage('darkTheme', false);
   const [searchTerm, setSearchTerm] = useState('');
   const [editingTask, setEditingTask] = useState(null);
-
-  // Применяем тему
+  
   React.useEffect(() => {
     if (isDarkTheme) {
       document.body.classList.add('dark-theme');
@@ -19,7 +18,7 @@ function App() {
     }
   }, [isDarkTheme]);
 
-  // Фильтрация задач
+
   const filteredTasks = useMemo(() => {
     return tasks.filter(task => {
       const matchesSearch = task.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -31,11 +30,9 @@ function App() {
 
   const handleAddTask = (task) => {
     if (editingTask) {
-      // Обновление существующей задачи
       setTasks(tasks.map(t => t.id === task.id ? task : t));
       setEditingTask(null);
     } else {
-      // Добавление новой задачи
       setTasks([...tasks, task]);
     }
   };
